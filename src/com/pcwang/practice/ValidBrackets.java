@@ -9,7 +9,7 @@ public class ValidBrackets {
 	
 	
 	public static void main(String[] args) {
-		String s = "([])";
+		String s = "(]";
 		//System.out.println("½Y¹û="+isValid(s));
 		System.out.println(right(s));
 	}
@@ -30,30 +30,23 @@ public class ValidBrackets {
 		map.put(")", "(");
 		map.put("}", "{");
 		map.put("]", "[");
-		for (int i = 0;i < ch.length;i++) {
-			String e = String.valueOf(ch[i]);
-			if (map.containsKey(e)) {
-				if (")".equals(e) || "}".equals(e) || "]".equals(e)) {
-					String top = "";
-					if (str.empty()) {
-						str.push("1");
-					} else {
-						top = str.pop();
-					}
-					if (!top.equals(map.get(e))) {
-						return false;
-					}
-					
-				}else {
-					str.push(e);
+		for (char c : ch) {
+			String st = String.valueOf(c);
+			if (map.containsKey(st)) {
+				String top = "";
+				if (str.empty()) {
+					top = "1";
+				} else {
+					top = str.pop();
 				}
+				if (!top.equals(map.get(st))) {
+					return false;
+				}
+			} else {
+				str.push(st);
 			}
-			
-		}
-		if (str.empty()) {
-			return true;
-		}
-		return false;
+			}
+		return str.isEmpty();
 	}
 	
 	
